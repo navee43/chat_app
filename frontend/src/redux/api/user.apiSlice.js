@@ -2,6 +2,7 @@ import apiSlice from "./apiSlice";
 import { MAIN_URL } from "../constant.js";
 
 
+
 export const userApiSlice = apiSlice.injectEndpoints({
 
 
@@ -25,6 +26,15 @@ export const userApiSlice = apiSlice.injectEndpoints({
             })
         })
         ,
+        logout:builder.mutation({
+
+            query:()=>({
+                url:`${MAIN_URL}/logout`,
+                method:"post",
+                
+
+            })
+        })
 
 
 
@@ -32,4 +42,4 @@ export const userApiSlice = apiSlice.injectEndpoints({
     
 })
 
-export const {useLoginMutation ,useRegisterMutation} = userApiSlice;
+export const {useLoginMutation ,useRegisterMutation , useLogoutMutation} = userApiSlice;
