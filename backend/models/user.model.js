@@ -33,6 +33,7 @@ const userSchema = mongoose.Schema({
     refreshToken:{
         type:String
     }
+    
 },{Timestamp:true})
 
 

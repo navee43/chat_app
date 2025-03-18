@@ -36,7 +36,7 @@ function HeaderLayout() {
   }, []);
 
   return (
-    <div className='w-full h-16 bg-black backdrop-blur-sm flex justify-between items-center md:px-10 px-5 relative'>
+    <div className='w-full h-16 bg-black backdrop-blur-sm flex justify-between items-center md:px-10 px-5 relative '>
       {/* Logo */}
       <p className='text-red-500 text-2xl shadow-2xl shadow-red-600'>LinkUp</p>
 

@@ -35,6 +35,22 @@ export const userApiSlice = apiSlice.injectEndpoints({
 
             })
         })
+        ,
+        getUsers:builder.query({
+            query: () => `${MAIN_URL}/getusers`,
+            transformResponse: (response) => {
+              console.log("API Response:", response);   
+              return response.data; 
+            },
+        })
+
+        // , getUser:builder.query({
+        //               query: () => `${MAIN_URL}/getCurrentUser`,
+        //                 transformResponse: (response) => {
+        //                   console.log("API Response:", response); // Log to check the structure
+        //                   return response.data; // Since the jobs are inside the `data` field
+        //                 },
+        //            })
 
 
 
@@ -42,4 +58,4 @@ export const userApiSlice = apiSlice.injectEndpoints({
     
 })
 
-export const {useLoginMutation ,useRegisterMutation , useLogoutMutation} = userApiSlice;
+export const {useLoginMutation ,useRegisterMutation , useLogoutMutation ,useGetUsersQuery} = userApiSlice;

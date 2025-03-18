@@ -4,6 +4,9 @@ import LandingPage from "./Pages/LandingPage.jsx";
 import { lazy } from "react";
 import ProtectedRoutes from "./utils/AuthGuard.jsx";
 import AuthGuard from "./utils/AuthGuard.jsx";
+import OnlineUsers from "./Pages/OnlineUsers.jsx";
+import WelcomePage from "./Pages/WelcomePage.jsx";
+import CreateGroup from "./Pages/createGroup.jsx";
 const Home = lazy(()=>import('../src/Pages/Home.jsx'))
 const Login = lazy(()=>import('../src/Pages/Login.jsx'))
 const Chat = lazy(()=>import('../src/Pages/Chat.jsx'))
@@ -19,9 +22,13 @@ const frontRoutes = createBrowserRouter(
            
 
            <Route element={<AuthGuard protectedRoute={true}/>}>
-           <Route index element={<Home />} />
-            <Route path="/chat/:chatId" element={<Chat/>}/>
-            <Route path="/groups" element={<Groups/>}/> 
+           <Route index element={<WelcomePage/>} />
+            <Route path="chat/:chatId" element={<Chat/>}/>
+            <Route path="groups" element={<Groups/>}/> 
+            <Route path="onlineusers" element={<OnlineUsers/>}/>
+            <Route path="creategroups" element={<CreateGroup/>}/> 
+            <Route path="groups" element={<Groups/>}/> 
+            
 
            </Route>
 

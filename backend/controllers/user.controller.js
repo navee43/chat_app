@@ -3,6 +3,7 @@ import { ApiError } from "../utils/ApiError.js";
 import {ApiResponse} from '../utils/ApiResponse.js';
 import { User } from '../models/user.model.js'
 import { uploadOnCloudinary } from "../utils/cloudinary.js";
+import { retry } from "@reduxjs/toolkit/query";
 
 
 
@@ -137,6 +138,15 @@ const Logout = asyncHandler(async(req,res)=>{
       .json(new ApiResponse(200 , {},"user logged out succesfully"))
 })
 
-export  {Register , Login ,Logout}
+const getUsers = asyncHandler(async(req, res)=>{
+
+    const users = await User.find({}).select("-refreshToken -password")
+    if(!users){
+        throw new ApiError(400 , "there is some issue while fetching users ")
+    }
+    return res.status(200).json(new ApiResponse(200 , users  , "users fetched successfully"))
+})
+
+export  {Register , Login ,Logout , getUsers}
 
  
