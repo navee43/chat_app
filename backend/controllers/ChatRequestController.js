@@ -1,22 +1,30 @@
 import {asyncHandler} from '../utils/asyncHandler.js'
 import {ChatRequest} from '../models/ChatRequest.js'
-import Chat from '../models/Chat.model.js'
+import {Chat} from '../models/Chat.model.js'
 const sendChatRequest = asyncHandler(async(req , res)=>{
-    const { senderId, receiverId } = req.body;
   try {
-    // Check if a pending request already exists
-    const existingRequest = await ChatRequest.findOne({ sender: senderId, receiver: receiverId, status: 'pending' });
-    if (existingRequest) return res.status(400).json({ message: 'Request already sent.' });
+    console.log("Received Body:", req.body); // Debugging
+
+    const senderId = req.user.id; // Extract senderId from JWT token
+    const { receiverId } = req.body;
+
+    if (!receiverId) return res.status(400).json({ message: "Receiver ID is required" });
+
+    // Prevent duplicate requests
+    const existingRequest = await ChatRequest.findOne({ sender: senderId, receiver: receiverId, status: "pending" });
+    if (existingRequest) return res.status(400).json({ message: "Request already sent." });
 
     const chatRequest = new ChatRequest({ sender: senderId, receiver: receiverId });
     await chatRequest.save();
+
     res.status(201).json(chatRequest);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error("Error in sendChatRequest:", error);
+    res.status(500).json({ message: "Internal Server Error", error: error.message });
   }
 })
 
-const sendPendingRequests = asyncHandler(async(req ,res)=>{
+const getPendingRequests = asyncHandler(async(req ,res)=>{
     try {
         const requests = await ChatRequest.find({ receiver: req.params.userId, status: 'pending' })
                                           .populate('sender', 'username email');
@@ -49,4 +57,17 @@ const acceptChatRequest = asyncHandler(async(req ,res)=>{
       }
 })
 
-export {sendChatRequest , acceptChatRequest , sendPendingRequests}
+const rejectChatRequest = asyncHandler(async(req ,res)=>{
+  try {
+    const request = await ChatRequest.findById(req.params.requestId);
+    if (!request) return res.status(404).json({ message: 'Request not found' });
+
+    request.status = 'rejected';
+    await request.save();
+
+    res.json({ message: 'Chat request rejected' });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+})
+export {sendChatRequest , acceptChatRequest , getPendingRequests ,rejectChatRequest}

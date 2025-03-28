@@ -3,9 +3,9 @@ import {Register, Login ,Logout, getUsers} from '../controllers/user.controller.
 import { upload } from "../middlewares/multer.middleware.js";
 // import { verify } from "jsonwebtoken";
 import { verifyJWT } from "../middlewares/auth.middleware.js";
-import { createOneOnOneChat, getUserChats , createGroupChat} from "../controllers/Chat.controller.js";
-import {sendMessage ,getChatMessages, markAsSeen } from '../controllers/Message.controller.js'
-import { sendChatRequest ,sendPendingRequests , acceptChatRequest } from "../controllers/ChatRequestController.js";
+// import {  getUserChats , createGroupChat} from "../controllers/Chat.controller.js";
+// import {sendMessage , } from '../controllers/Message.controller.js'
+// import { sendChatRequest ,getPendingRequests , acceptChatRequest, rejectChatRequest } from "../controllers/ChatRequestController.js";
 
 const router = Router()
 
@@ -20,9 +20,10 @@ router.route('/getusers').get(getUsers)
 // router.route('/sendMessage').get(sendMessage)
 // router.route("/:chatId").get(getChatMessages)
 // router.route('/seen').get(markAsSeen)
-    router.route('/send').post(sendChatRequest)
-    router.route('/pending/:userId').get(sendPendingRequests)
-    router.route('/accept/:requestId').post(acceptChatRequest)
+    // router.route('/send').post(verifyJWT ,  sendChatRequest)
+    // router.route('/pending/:userId').get(verifyJWT ,getPendingRequests)
+    // router.route('/accept/:requestId').post(verifyJWT ,acceptChatRequest)
+    // router.route('/reject/:requestId').post(verifyJWT , rejectChatRequest)
 
 export default router;
 

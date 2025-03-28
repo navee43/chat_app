@@ -161,7 +161,7 @@ const dispatch = useDispatch();
 
           :
 
-         <div className=' backdrop-blur-md bg-white/30 h-[600px] md:w-96 rounded-lg flex  items-center justify-center w-88 '>
+         <div className='  backdrop-blur-md bg-white/20 h-[600px] md:w-96 rounded-lg flex  items-center justify-center w-88 '>
 
         <form  className='space-y-4 ' >
             <h1 className='text-3xl font-semibold capitalize text-center '>Register</h1>

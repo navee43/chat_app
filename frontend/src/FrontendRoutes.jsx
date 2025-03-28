@@ -7,6 +7,8 @@ import AuthGuard from "./utils/AuthGuard.jsx";
 import OnlineUsers from "./Pages/OnlineUsers.jsx";
 import WelcomePage from "./Pages/WelcomePage.jsx";
 import CreateGroup from "./Pages/createGroup.jsx";
+import PendingRequests from "./Pages/PendingRequests.jsx";
+import SendRequest from "./Pages/SendRequest.jsx";
 const Home = lazy(()=>import('../src/Pages/Home.jsx'))
 const Login = lazy(()=>import('../src/Pages/Login.jsx'))
 const Chat = lazy(()=>import('../src/Pages/Chat.jsx'))
@@ -23,11 +25,13 @@ const frontRoutes = createBrowserRouter(
 
            <Route element={<AuthGuard protectedRoute={true}/>}>
            <Route index element={<WelcomePage/>} />
-            <Route path="chat/:chatId" element={<Chat/>}/>
+            <Route path="/chat/:chatId/:chatName" element={<Chat/>}/>
             <Route path="groups" element={<Groups/>}/> 
             <Route path="onlineusers" element={<OnlineUsers/>}/>
             <Route path="creategroups" element={<CreateGroup/>}/> 
-            <Route path="groups" element={<Groups/>}/> 
+            {/* <Route path="groups" element={<Groups/>}/>  */}
+            <Route path="req" element={<PendingRequests/>}/>
+            <Route path="send" element={<SendRequest/>}/>
             
 
            </Route>
