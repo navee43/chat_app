@@ -98,7 +98,8 @@ const loggedIn = await User.findById(user._id).select("-password -refreshToken")
 
 const options ={
     httpOnly:true,
-    secure:true
+    secure:true,
+    sameSite:"none",
   }
  
   console.log('success')
@@ -130,7 +131,9 @@ const Logout = asyncHandler(async(req,res)=>{
 
     const options ={
         httpOnly:true,
-        secure:true
+        secure:true,
+        sameSite:"none", 
+ // POST https://chat-app-backend-8vht.onrender.com/api/user/logout 401 (Unauthorized)
       }
       return res.status(200)
       .clearCookie("accessToken",options)
