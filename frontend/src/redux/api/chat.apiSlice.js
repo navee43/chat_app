@@ -53,7 +53,16 @@ export const ChatApiSlice = apiSlice.injectEndpoints({
             })
         }),
 
+        deleteChat:builder.mutation({
+            query:(chatId)=>({
+                url: `${CHAT_URL}/${chatId}`, 
+                method:"DELETE",
+             
+
+            })
+        })
+
     })
 })
 
-export const {useAccessChatMutation ,useFetchChatQuery ,useCreateGroupChatMutation , useGetGroupsChatsQuery, useAddSelfToGroupMutation} = ChatApiSlice;
+export const {useAccessChatMutation ,useFetchChatQuery ,useCreateGroupChatMutation ,useDeleteChatMutation, useGetGroupsChatsQuery, useAddSelfToGroupMutation} = ChatApiSlice;

@@ -27,15 +27,15 @@ function MessageSelf({message,timestamp}) {
   
     const {userInfo} = useSelector(state=>state.auth)
   return (
-    <div className=' flex items-center mx-2 space-x-3'>
+    <div className=' flex items-center mx-2 space-x-1 lg:space-x-4'>
      <div>
-     <div className='bg-gray-600 text-white p-2.5 rounded-lg max-w-xs font-semibold relative min-w-36 '>
+     <div className='bg-gray-600 text-white p-2 lg:p-2.5 rounded-lg max-w-xs font-semibold relative  lg:min-w-36 '>
       <p>{message} </p>
-      <p className="text-[10px] text-end" >{time}</p>
+      <p className="text-[8px] lg:text-[10px] text-end" >{time}</p>
       </div>
      
      </div>
-      {<img src={userInfo.data.user.image} className='rounded-[50%] size-10'/>}
+      {<img src={userInfo.data.user.image} className='rounded-[50%] size-7 lg:size-10'/>}
 
       
     </div>

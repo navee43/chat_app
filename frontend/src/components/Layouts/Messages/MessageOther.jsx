@@ -2,6 +2,8 @@ import React from 'react'
 import { useSelector } from 'react-redux'
 
 function MessageOther({message ,image , timestamp}) {
+
+  
   
     const {userInfo} = useSelector(state=>state.auth)
     const formatTime = (timestamp) => {
@@ -24,15 +26,15 @@ function MessageOther({message ,image , timestamp}) {
     };
   
     var time = formatTime(timestamp)
-    // const {chatId,chatName} =useParams();
+   
   return (
-    <div className=' flex items-center mx-2 space-x-3'>
-       {<img src={image} className='rounded-[50%] size-10'/>}
+    <div className=' flex items-center mx-2 space-x-1 lg:space-x-4'>
+       {<img src={image} className='rounded-[50%] size-7 lg:size-10'/>}
 
      
-     <div className='bg-gray-100 text-black p-2.5 rounded-lg max-w-xs font-semibold relative min-w-36 '>
+     <div className='bg-gray-100 text-black p-2 lg:p-2.5 rounded-lg max-w-xs font-semibold relative  lg:min-w-36'>
       <p>{message} </p>
-      <p className="text-[10px] text-end" >{time}</p>
+      <p className="text-[8px] lg:text-[10px] text-end" >{time}</p>
       </div>
    
     

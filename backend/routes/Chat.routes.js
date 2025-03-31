@@ -4,7 +4,7 @@ import {accessChat ,
      addSelfToGroup , 
     groupExit  ,
     createGroupChat,
-    fetchGroupChat} from '../controllers/Chat.controller.js'
+    fetchGroupChat ,deleteChat} from '../controllers/Chat.controller.js'
 import { verifyJWT } from "../middlewares/auth.middleware.js";
 
 const router = Router()
@@ -15,7 +15,7 @@ router.route('/addSelfToGroup').put(verifyJWT, addSelfToGroup)
 router.route('/groupExit').put(verifyJWT , groupExit)
 router.route('/createGroupChat').post(verifyJWT , createGroupChat)
 router.route('/fetchGroupChat').get(verifyJWT , fetchGroupChat)
-
+router.route('/:chatId').delete(verifyJWT , deleteChat)
 export default router 
 
 

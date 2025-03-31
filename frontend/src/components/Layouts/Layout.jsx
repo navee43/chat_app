@@ -1,20 +1,32 @@
-import { useState } from "react";
-import { useSelector } from "react-redux";
-import { Outlet } from "react-router-dom";
-import SideBar from "./SideBar";
+import { useSelector } from "react-redux"
+import { ToastContainer } from "react-toastify"
+import SideBar from "./SideBar"
+import { Outlet } from "react-router"
+import MidContainer from "./MidContainer"
+import Profile from "./Profile"
 
-function Layout() {
-  const { userInfo } = useSelector((state) => state.auth);
-  const [showChat, setShowChat] = useState(false);
+function Layout({hide}) {
+  const {userInfo }= useSelector(state=>state.auth)
 
+  const {isPopupHidden}= useSelector(state=>state.hide) 
   return (
-    <div className="flex flex-1 h-screen">
-      {userInfo && !showChat && <SideBar setShowChat={setShowChat} />}
-      <div className={`flex-1 ${!showChat ? "hidden lg:block" : "block w-full"}`}>
-        <Outlet context={{ setShowChat }} />
-      </div>
-    </div>
-  );
-}
+    <div className="flex flex-1">
+<ToastContainer/>
+<div>
+{userInfo ? <div className=" relative min-h-screen  grid  grid-cols-[60px_2fr]"><SideBar/> <div >{
+        isPopupHidden && <Profile/>
+      }
+      <MidContainer/></div></div> :null}  
+</div>
 
-export default Layout;
+
+<div className="flex-1 ">    <Outlet/></div>
+    
+    
+    
+    </div>
+    
+    
+  )
+}
+export default Layout 

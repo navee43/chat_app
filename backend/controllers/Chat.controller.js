@@ -57,6 +57,7 @@ import {User} from '../models/user.model.js'
 import {ApiError} from '../utils/ApiError.js'
 import {ApiResponse} from '../utils/ApiResponse.js'
 import { json } from 'express'
+import { Message } from '../models/Message.model.js'
 
 
 const accessChat = asyncHandler(async(req,res)=>{
@@ -151,7 +152,7 @@ const fetchChats = asyncHandler(async(req ,res)=>{
 
 
 const fetchGroupChat = asyncHandler(async(req , res)=>{
-    const allGroups = await Chat.where("isGroupChat").equals(true);
+    const allGroups = await Chat.where("isGroupChat").equals(true).populate("groupAdmin","-password");
     if(!allGroups){
         throw new ApiError(400 , "there is some problem while fetching group chat ")
     }
@@ -226,5 +227,27 @@ if(!addSelf){
 return res.status(200).json(new ApiResponse(200 , addSelf, "you are added in group successfully"))
 })
 
+const deleteChat  = asyncHandler(async(req, res)=>{
+    const {chatId} = req.params;
+    console.log(chatId)
+    const chat = await Chat.findById(chatId)
 
-export {accessChat , fetchChats , addSelfToGroup , groupExit  ,createGroupChat,fetchGroupChat}
+    if(!chat){
+        throw new ApiError(404 , "no chat found with this id ")
+    }
+if(!chat.users.includes(req.user._id) && chat.groupAdmin !==req.user._id){
+    return res.status(403).json(new ApiError(403, "not authorized"))
+}
+
+       const deletedMess =   await Message.deleteMany({chat:chatId})
+        const deletedChat =  await Chat.findByIdAndDelete(chatId)
+ if(!deletedChat || !deletedMess){
+    throw new ApiError(400 , "some error while deleting chat ")
+ }
+
+ return res.status(200).json(new ApiResponse(200 , deletedChat , "chat deleted successfully"))
+
+})
+
+
+export {accessChat , fetchChats , addSelfToGroup , groupExit  ,createGroupChat,fetchGroupChat ,deleteChat}

@@ -8,19 +8,10 @@ import Loader from '../components/Loader/Loader.jsx'
 import { useDispatch } from 'react-redux';
 import { setCredentials } from '../redux/auth/auth.slice.js';
 
-
-
-
-
- 
- 
-
 function Login() {
 
 
-const [LoginCall] = useLoginMutation();    
-const [RegisterCall ,{isLoading}] = useRegisterMutation();
-    
+
 const [image, setImage] = useState(null);
 const [toggle  , setToggle] = useState(true);
 const navigate = useNavigate()
@@ -28,13 +19,18 @@ const [userName ,setUsername] = useState("")
 const [email , setEmail] = useState("")
 const [password , setPassword] = useState("")
 
+
 const dispatch = useDispatch();
 
 
 
+const [LoginCall] = useLoginMutation();    
+const [RegisterCall ,{isLoading}] = useRegisterMutation();
+
+
     const handleImageChange = (event) => {
         const file = event.target.files[0];
-        // setImage(event.target.files[0])
+       
 
         setImage(file)
         // if (file) {
@@ -51,12 +47,21 @@ const dispatch = useDispatch();
         const res = await LoginCall({ email, password }).unwrap();
         if(res){
           dispatch(setCredentials(res))
-           toast.success("Login successFully! ✅");
+           toast.success("Login success",{
+            position: "top-right",
+            autoClose: 3000, 
+            hideProgressBar: false, 
+            closeOnClick: true, 
+            pauseOnHover: true, 
+            draggable: true, 
+            progress: undefined, 
+            theme: "dark", 
+          });
             navigate('/')
         }
         
        } catch (error) {
-         let errorMessage = "Login failed! ❌"; 
+         let errorMessage = "Login failed!"; 
             
               if (error?.data) {
                 
@@ -73,7 +78,16 @@ const dispatch = useDispatch();
                 }
               }
             XMLDocument
-              toast.error(errorMessage, { position: "top-right" });
+              toast.error(errorMessage, {
+                position: "top-right",
+                autoClose: 3000, 
+                hideProgressBar: false, 
+                closeOnClick: true, 
+                pauseOnHover: true, 
+                draggable: true, 
+                progress: undefined, 
+                theme: "dark", 
+              });
             
               // console.log("Something went wrong while sending data to API: ", error);
         console.log("there is some error while login" , error)
@@ -93,7 +107,16 @@ const dispatch = useDispatch();
         try {
             const res =  await RegisterCall(formData).unwrap();
             if(res){
-               toast.success("user register successFully! ✅");
+               toast.success("user register successFully!",{
+                position: "top-right",
+                autoClose: 3000, 
+                hideProgressBar: false, 
+                closeOnClick: true, 
+                pauseOnHover: true, 
+                draggable: true, 
+                progress: undefined, 
+                theme: "dark", 
+              });
                 setToggle(!toggle)
                 setPassword("")
                 setEmail("")
@@ -120,7 +143,16 @@ const dispatch = useDispatch();
                     }
                   }
                 
-                  toast.error(errorMessage, { position: "top-right" });
+                  toast.error(errorMessage, {
+                    position: "top-right",
+                    autoClose: 3000, 
+                    hideProgressBar: false, 
+                    closeOnClick: true, 
+                    pauseOnHover: true, 
+                    draggable: true, 
+                    progress: undefined, 
+                    theme: "dark", 
+                  });
 
                   console.log("there is some error in registering" , error)
             
@@ -130,7 +162,7 @@ const dispatch = useDispatch();
       }
 
   return (
-    <div className=' h-screen w-full flex items-center justify-center  bg-center bg-cover ' style={{backgroundImage:"url('https://images.unsplash.com/photo-1629131530694-c2b44f0cd901?q=80&w=3087&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')"}}>
+    <div className=' h-screen w-full flex items-center justify-center  bg-center bg-cover ' style={{backgroundImage:"url('https://images.unsplash.com/photo-1444703686981-a3abbc4d4fe3?q=80&w=2940&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D')"}}>
         
   
 
