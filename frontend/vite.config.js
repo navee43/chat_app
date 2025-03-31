@@ -9,7 +9,7 @@ export default defineConfig({
 
   server: {
     proxy: {
-      "/api": "http://localhost:5230/",
+      "/api": "https://chat-app-backend-8vht.onrender.com/",
       // '/api':'http://localhost:5200'
       
     },
