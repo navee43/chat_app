@@ -6,7 +6,16 @@ import multer from 'multer';
 // import {express} from 'express'
 const app = express();
 
+const allowedOrigins = [
+  "https://chat-app-frontend-food.onrender.com",
+];
 
+app.use(
+  cors({
+    origin: allowedOrigins,
+    credentials: true,
+  })
+);
 // app.use(cors(
 //     {origin:'*',
 //         Credential:true}
