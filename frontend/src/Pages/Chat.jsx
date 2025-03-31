@@ -74,7 +74,7 @@ if(!selectedChat?.isGroupChat){
   
 
  
-  const socket = useMemo(() => io("http://localhost:5230"), []);
+  const socket = useMemo(() => io("https://chat-app-backend-8vht.onrender.com"), []);
 
  
   useEffect(() => {
