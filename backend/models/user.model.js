@@ -65,6 +65,7 @@ userSchema.methods.generateAccessToken = function(){
         }
     )
 }
+console.log("🚀 Signing token with secret:", process.env.ACCESS_TOKEN_SECRET);
 
 userSchema.methods.generateRefreshToken = function(){
    return jwt.sign(
