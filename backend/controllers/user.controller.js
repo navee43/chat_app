@@ -100,7 +100,7 @@ const options = {
   httpOnly: true,      // prevent JS access (XSS protection)
   secure: true,        // only send on HTTPS
   sameSite: "Strict",  // prevents CSRF
-  maxAge: 7 * 24 * 60 * 60 * 1000 // expires in 7 days
+  maxAge: 7 * 24 * 60 * 60 * 1000 // expires in 7 day
 };
  
   console.log('success')
