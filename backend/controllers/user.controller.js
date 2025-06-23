@@ -94,6 +94,7 @@ const Login = asyncHandler(async(req,res)=>{
         throw new ApiError(400 , "invalid password , try again ")
     }
     const {accessToken ,refreshToken} = await generateAccessAndRefreshTokens(user._id)
+    console.log("the token created while login is ", accessToken);
 const loggedIn = await User.findById(user._id).select("-password -refreshToken")
 
 const options = {
