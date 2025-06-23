@@ -6,7 +6,7 @@ const apiSlice = createApi({
     baseQuery:fetchBaseQuery({baseUrl:BASE_URL ,    
             prepareHeaders: (headers, { getState }) => {
       const token = getState()?.auth?.userInfo?.data?.accessToken; 
-      console.log("the token is " , getState()?.auth?.userInfo?.data?.accessToken )
+      console.log("the token that is sending by frontend is " , getState()?.auth?.userInfo?.data?.accessToken )
 
       if (token) {
         headers.set("Authorization", `Bearer ${token}`);
