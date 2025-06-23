@@ -96,11 +96,12 @@ const Login = asyncHandler(async(req,res)=>{
     const {accessToken ,refreshToken} = await generateAccessAndRefreshTokens(user._id)
 const loggedIn = await User.findById(user._id).select("-password -refreshToken")
 
-const options ={
-    httpOnly:true,
-    secure:true,
-    sameSite:"none",
-  }
+const options = {
+  httpOnly: true,      // prevent JS access (XSS protection)
+  secure: true,        // only send on HTTPS
+  sameSite: "Strict",  // prevents CSRF
+  maxAge: 7 * 24 * 60 * 60 * 1000 // expires in 7 days
+};
  
   console.log('success')
     return res
