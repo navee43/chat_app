@@ -48,7 +48,7 @@ userSchema.methods.isPasswordCorrect = async function(password){
     return await bcrypt.compare(password, this.password)
 }
 
-const secret ="859a04be247f7b54c0e4b727589731e29190db9bf2bc5b306b59726680ff971a";
+
 
 console.log("the secret is ",process.env.ACCESS_TOKEN_SECRET)
 console.log("the expiry is ",process.env.ACCESS_TOKEN_EXPIRY)
@@ -61,7 +61,7 @@ userSchema.methods.generateAccessToken = function(){
           
         },
      
-       secret,
+      process.env.ACCESS_TOKEN_SECRET,
       
         {
             expiresIn: process.env.ACCESS_TOKEN_EXPIRY
