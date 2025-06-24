@@ -59,13 +59,15 @@ userSchema.methods.generateAccessToken = function(){
             userName:this.userName,
           
         },
+      console.log("🚀 Signing token with secret:", process.env.ACCESS_TOKEN_SECRET);
         process.env.ACCESS_TOKEN_SECRET,
+      
         {
             expiresIn: process.env.ACCESS_TOKEN_EXPIRY
         }
     )
 }
-console.log("🚀 Signing token with secret:", process.env.ACCESS_TOKEN_SECRET);
+
 
 userSchema.methods.generateRefreshToken = function(){
    return jwt.sign(
