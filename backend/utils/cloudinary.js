@@ -17,7 +17,7 @@ dotenv.config({
     const uploadOnCloudinary = async (localFilePath)=>{
 
         try{
-            console.log(localFilePath)
+            // console.log(localFilePath)
             
             if(!localFilePath){
                 return "could find the path of the file"

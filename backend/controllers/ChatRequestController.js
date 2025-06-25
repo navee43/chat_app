@@ -3,7 +3,7 @@ import {ChatRequest} from '../models/ChatRequest.js'
 import {Chat} from '../models/Chat.model.js'
 const sendChatRequest = asyncHandler(async(req , res)=>{
   try {
-    console.log("Received Body:", req.body); // Debugging
+    // console.log("Received Body:", req.body); // Debugging
 
     const senderId = req.user.id; // Extract senderId from JWT token
     const { receiverId } = req.body;

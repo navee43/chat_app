@@ -15,7 +15,7 @@ const generateAccessAndRefreshTokens = async(userId)=>{
      const refreshToken = user.generateRefreshToken()
     
       user.refreshToken = refreshToken
-      console.log(user.refreshToken)
+    //   console.log(user.refreshToken)
    
       await user.save({validateBeforeSave:false})
       return {accessToken , refreshToken}
@@ -77,6 +77,7 @@ const Register = asyncHandler(async(req,res)=>{
    
 })
 
+
 const Login = asyncHandler(async(req,res)=>{
 
     const {email , password}= req.body;
@@ -93,13 +94,19 @@ const Login = asyncHandler(async(req,res)=>{
     if(!isPasswordValid){
         throw new ApiError(400 , "invalid password , try again ")
     }
+    console.log("🔐 JWT_SECRET used to sign:", process.env.ACCESS_TOKEN_SECRET);
+
     const {accessToken ,refreshToken} = await generateAccessAndRefreshTokens(user._id)
+    console.log("the token created while login is ", accessToken)
 const loggedIn = await User.findById(user._id).select("-password -refreshToken")
 
-const options ={
-    httpOnly:true,
-    secure:true
-  }
+const options = {
+  httpOnly: true,      // prevent JS access (XSS protection)
+  secure: true,        // only send on HTTPS
+  sameSite: "Strict",  // prevents CSRF
+  maxAge: 7 * 24 * 60 * 60 * 1000 // expires in 7 days
+};
+
  
   console.log('success')
     return res
@@ -113,7 +120,7 @@ const options ={
              user: loggedIn , accessToken ,
              refreshToken
           },
-          "user logged in successully"
+          "user logged in successfully"
        )
     )
 

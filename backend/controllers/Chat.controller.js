@@ -229,7 +229,7 @@ return res.status(200).json(new ApiResponse(200 , addSelf, "you are added in gro
 
 const deleteChat  = asyncHandler(async(req, res)=>{
     const {chatId} = req.params;
-    console.log(chatId)
+    // console.log(chatId)
     const chat = await Chat.findById(chatId)
 
     if(!chat){
