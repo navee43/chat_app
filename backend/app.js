@@ -6,7 +6,26 @@ import multer from 'multer';
 // import {express} from 'express'
 const app = express();
 
+const allowedOrigins = [
+  "https://chat-app-frontend-food.onrender.com",
+];
 
+// app.use(
+//   cors({
+//     origin: allowedOrigins,
+//     credentials: true,
+//   })
+// );
+app.use((req, res, next) => {
+  res.header(
+    "Access-Control-Allow-Origin",
+    "https://chat-app-frontend-food.onrender.com"
+  );
+  res.header("Access-Control-Allow-Credentials", "true");
+  res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS");
+  res.header("Access-Control-Allow-Headers", "Content-Type, Authorization");
+  next();
+});
 // app.use(cors(
 //     {origin:'*',
 //         Credential:true}

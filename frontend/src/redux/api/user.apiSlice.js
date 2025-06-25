@@ -14,14 +14,16 @@ export const userApiSlice = apiSlice.injectEndpoints({
             query:(data)=>({
                 url:`${MAIN_URL}/login`,
                 method:"post",
-                body:data
+                body:data,
+                credentials: "include",
             })
         })
         , Register:builder.mutation({
             query:(data)=>({
                 url:`${MAIN_URL}/register`,
                 method:"post",
-                body:data
+                body:data,
+                credentials:"include",
 
             })
         })
@@ -31,6 +33,7 @@ export const userApiSlice = apiSlice.injectEndpoints({
             query:()=>({
                 url:`${MAIN_URL}/logout`,
                 method:"post",
+                credentials:"include",
                 
 
             })
