@@ -23,9 +23,8 @@ const [password , setPassword] = useState("")
 const dispatch = useDispatch();
 
 
-
-const [LoginCall] = useLoginMutation();    
-const [RegisterCall ,{isLoading}] = useRegisterMutation();
+const [LoginCall ,{isLoading:LoginLoading}] = useLoginMutation();    
+const [RegisterCall ,{isLoading:RegisterLoading}] = useRegisterMutation();
 
 
     const handleImageChange = (event) => {
@@ -188,7 +187,7 @@ const [RegisterCall ,{isLoading}] = useRegisterMutation();
                </div>
    
            </form>
-           {isLoading && <Loader/>}
+           {LoginLoading && <Loader/>}
           </div> 
 
           :
@@ -246,7 +245,7 @@ const [RegisterCall ,{isLoading}] = useRegisterMutation();
 
         </form>
 
-        {isLoading && <Loader/>}
+        {RegisterLoading && <Loader/>}
        </div>
  
 
